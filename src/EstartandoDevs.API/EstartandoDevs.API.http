@@ -1,0 +1,6 @@
+@EstartandoDevs.API_HostAddress = http://localhost:5237
+
+GET {{EstartandoDevs.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
