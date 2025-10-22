@@ -4,7 +4,7 @@ using MediatR;
 
 using System.Net;
 
-namespace EstartandoDevs.Application.CasosDeUso.Fornecedor.Criar
+namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Criar
 {
     public class CriarFornecedorCommand : IRequest<CriarFornecedorCommandResponse>
     {
@@ -27,18 +27,18 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedor.Criar
 
             validacoes.RuleFor(fornecedor => fornecedor.Nome)
                 .NotEmpty()
-                .WithErrorCode(HttpStatusCode.BadRequest.ToString())
+                .WithErrorCode(((int)HttpStatusCode.BadRequest).ToString()) //"BadRequest" -> "400"
                 .WithMessage("O nome do fornecedor deve ser informado.");
 
             validacoes.RuleFor(fornecedor => fornecedor.Documento)
                .NotEmpty()
-               .WithErrorCode(HttpStatusCode.BadRequest.ToString())
+               .WithErrorCode(((int)HttpStatusCode.BadRequest).ToString())
                .WithMessage("O documento do fornecedor precisa ser informado");
 
             validacoes.RuleFor(fornecedor => fornecedor.TipoFornecedor)
                 .NotEmpty()
                 .InclusiveBetween(1, 2)
-                .WithErrorCode(HttpStatusCode.BadRequest.ToString())
+                .WithErrorCode(((int)HttpStatusCode.BadRequest).ToString())
                 .WithMessage("O tipo do fornecedor precisa ser 1 (Pessoa Física) ou 2 (Pessoa Jurídica)");
 
             ResultadoDasValidacoes = validacoes.Validate(this);

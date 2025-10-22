@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EstartandoDevs.Application\EstartandoDevs.Application.csproj" />
     <ProjectReference Include="..\EstartandoDevs.Infrastructure\EstartandoDevs.Infrastructure.csproj" />
   </ItemGroup>
 
