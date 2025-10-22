@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstartandoDevs.API", "src\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstartandoDevs.Application", "src\EstartandoDevs.Application\EstartandoDevs.Application.csproj", "{19CEE86D-F6F2-4282-A82B-EAAA3DB866F1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8B926E5E-F6F1-4E8D-8149-4192F40C2702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstartandoDevs.Application.Tests", "tests\EstartandoDevs.Application.Tests\EstartandoDevs.Application.Tests.csproj", "{AAAA4449-F197-4CD4-BF1A-6B82843EAD28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,11 +42,16 @@ Global
 		{19CEE86D-F6F2-4282-A82B-EAAA3DB866F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19CEE86D-F6F2-4282-A82B-EAAA3DB866F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19CEE86D-F6F2-4282-A82B-EAAA3DB866F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAAA4449-F197-4CD4-BF1A-6B82843EAD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAAA4449-F197-4CD4-BF1A-6B82843EAD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAAA4449-F197-4CD4-BF1A-6B82843EAD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAAA4449-F197-4CD4-BF1A-6B82843EAD28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{95974329-9ED5-4511-9A3A-F2F5751BF9BC} = {1B38B639-4D37-419D-B9DD-838683B1027A}
 		{D6B25123-9E6A-4FED-BC3C-748F004B4F5B} = {1B38B639-4D37-419D-B9DD-838683B1027A}
 		{9642C8C8-A716-43C5-87CB-9220D6017ACD} = {1B38B639-4D37-419D-B9DD-838683B1027A}
 		{19CEE86D-F6F2-4282-A82B-EAAA3DB866F1} = {1B38B639-4D37-419D-B9DD-838683B1027A}
+		{AAAA4449-F197-4CD4-BF1A-6B82843EAD28} = {8B926E5E-F6F1-4E8D-8149-4192F40C2702}
 	EndGlobalSection
 EndGlobal

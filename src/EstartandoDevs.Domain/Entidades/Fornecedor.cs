@@ -14,11 +14,11 @@ namespace EstartandoDevs.Domain.Entidades
         public IEnumerable<Produto> Produtos { get; private set; } = [];
        
         public Fornecedor() { }
-        public Fornecedor(string? nome, string? documento, TipoFornecedorEnum tipoFornecedor)
+        public Fornecedor(string? nome, string? documento, int tipoFornecedor)
         {
             Nome = nome;
             Documento = documento;
-            TipoFornecedor = tipoFornecedor;
+            TipoFornecedor = Enum.Parse<TipoFornecedorEnum>(tipoFornecedor.ToString());
             Ativo = true;
         }
     }
