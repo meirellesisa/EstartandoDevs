@@ -3,6 +3,7 @@ using EstartandoDevs.API.Controller.DTOs;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.Criar;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.Editar;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.Excluir;
+using EstartandoDevs.Application.CasosDeUso.Fornecedores.ListarFornecedoresProdutos;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterFornecedorProdutosEndereco;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,15 @@ namespace EstartandoDevs.API.Controller
         {
             _mediator = mediator;
         }
+
+        [HttpGet]
+        [Route("/fornecedores")]
+        public async Task<IActionResult> ObterTodos()
+        {
+            var command = new ListarFornecedoresProdutosCommand();
+            var response = await _mediator.Send(command, CancellationToken.None);
+            return StatusCode((int)response.StatusCode, response);
+        } 
 
         [HttpGet]
         [Route("fornecedores/{idFornecedor}")]

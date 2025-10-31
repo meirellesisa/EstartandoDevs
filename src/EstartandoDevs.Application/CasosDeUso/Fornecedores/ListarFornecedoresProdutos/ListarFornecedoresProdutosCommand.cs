@@ -3,5 +3,5 @@ using MediatR;
 
 namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.ListarFornecedoresProdutos
 {
-    public class ListarFornecedoresProdutosCommand : IRequest<CommandResponse<ListarFornecedoresProdutosCommandResponse>>{}
+    public class ListarFornecedoresProdutosCommand : IRequest<CommandResponse<List<ListarFornecedoresProdutosCommandResponse>>>{}
 }
