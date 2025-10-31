@@ -16,13 +16,13 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
             string nome,
             string documento,
             TipoFornecedorEnum tipoFornecedor,
-            ObterFornecedorProdutosEndereco_Endereco endereco,
-            List<ObterFornecedorProdutosEndereco_Produtos> produtos)
+            ObterFornecedorProdutosEndereco_Endereco? endereco,
+            List<ObterFornecedorProdutosEndereco_Produtos>? produtos)
         {
             Id = id;
             Nome = nome;
             Documento = documento;
-            TipoFornecedor = (TipoFornecedorEnum)tipoFornecedor;
+            TipoFornecedor = tipoFornecedor;
             Endereco = endereco;
             Produtos = produtos;
         }

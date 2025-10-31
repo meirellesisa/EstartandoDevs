@@ -38,9 +38,7 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Editar
             // documento precisa ser validado
 
             fornecedor.AtribuirNome(request.Nome);
-            fornecedor.AtribuirDocumento(request.Documento);
-            fornecedor.AtribuirTipoFornecedor(request.TipoFornecedor);
-
+        
             await _fornecedorRepository.Atualizar(fornecedor);
 
             return CommandResponse<Unit>.Sucesso(null,HttpStatusCode.OK);
