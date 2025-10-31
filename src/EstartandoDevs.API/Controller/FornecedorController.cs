@@ -21,7 +21,7 @@ namespace EstartandoDevs.API.Controller
         }
 
         [HttpGet]
-        [Route("/fornecedores")]
+        [Route("fornecedores")]
         public async Task<IActionResult> ObterTodos()
         {
             var command = new ListarFornecedoresProdutosCommand();
