@@ -39,6 +39,13 @@ namespace EstartandoDevs.Infrastructure.Repository
             return response;
         }
 
+        public Task<bool> NomeJaUtilizado(string nome)
+        {
+            var response = _contexto.Fornecedores
+                .AsNoTracking()
+                .AnyAsync(fornecedor => EF.Functions.Like(fornecedor.Nome, nome), CancellationToken.None);
 
+            return response;
+        }
     }
 }

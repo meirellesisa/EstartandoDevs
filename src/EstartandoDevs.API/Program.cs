@@ -1,4 +1,6 @@
+using EstartandoDevs.Domain.Repository;
 using EstartandoDevs.Infrastructure.Context;
+using EstartandoDevs.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -18,6 +20,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+// Injeção de dependência dos repositórios
+builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 
 var app = builder.Build();
 
