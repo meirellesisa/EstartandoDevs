@@ -1,13 +1,33 @@
 ﻿{
   "profiles": {
-    "https": {
+    "Desenvolvimento": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7147;http://localhost:5237",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DefaultConnection": "Server=localhost;Port=3306;Database=estartando-devs;Uid=root;Pwd=37691088;",
+        "COGNITO_CLIENT_ID": "7dtqo0kjo6em2r4mqkiao8fgv6",
+        "COGNITO_USER_POOL_ID": "us-east-1_yG05iSZoJ",
+        "COGNITO_CLIENT_SECRET": "cchhjc2mkebba4k05rpk06hdq3uasrg09541sg06t358e0fho7f",
+        "COGNITO_REGION": "us-east-1"
+      }
+    },
+    "Producao": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:7147;http://localhost:5237",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DefaultConnection": "Server=localhost;Port=3306;Database=estartando-devs;Uid=root;Pwd=37691088;",
+        "COGNITO_CLIENT_ID": "7dtqo0kjo6em2r4mqkiao8fgv6",
+        "COGNITO_USER_POOL_ID": "us-east-1_yG05iSZoJ",
+        "COGNITO_CLIENT_SECRET": "cchhjc2mkebba4k05rpk06hdq3uasrg09541sg06t358e0fho7f",
+        "COGNITO_REGION": "us-east-1"
       }
     }
   }

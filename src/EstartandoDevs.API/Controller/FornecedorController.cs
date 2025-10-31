@@ -6,11 +6,12 @@ using EstartandoDevs.Application.CasosDeUso.Fornecedores.Excluir;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.ListarFornecedoresProdutos;
 using EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterFornecedorProdutosEndereco;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstartandoDevs.API.Controller
 {
-    [Route("api/")] // usando o o pacote de Mvc 
+    [Authorize]
     public class FornecedorController : BaseController
     {
         private readonly IMediator _mediator;
@@ -21,13 +22,13 @@ namespace EstartandoDevs.API.Controller
         }
 
         [HttpGet]
-        [Route("/fornecedores")]
+        [Route("fornecedores")]
         public async Task<IActionResult> ObterTodos()
         {
             var command = new ListarFornecedoresProdutosCommand();
             var response = await _mediator.Send(command, CancellationToken.None);
             return StatusCode((int)response.StatusCode, response);
-        } 
+        }
 
         [HttpGet]
         [Route("fornecedores/{idFornecedor}")]
@@ -74,8 +75,8 @@ namespace EstartandoDevs.API.Controller
         [Route("fornecedores/{idFornecedor}")]
         public async Task<ActionResult> Excluir(Guid idFornecedor)
         {
-           var command = new ExcluirFornecedorCommand(
-                id: idFornecedor);
+            var command = new ExcluirFornecedorCommand(
+                 id: idFornecedor);
 
             var response = await _mediator.Send(command, CancellationToken.None);
 
