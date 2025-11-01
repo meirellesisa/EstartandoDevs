@@ -6,6 +6,7 @@ namespace EstartandoDevs.Domain.Repository
     {
         Task<Fornecedor> ObterFornecedorEndereco(Guid fornecedorId);
         Task<Fornecedor> ObterFornecedorProdutosEndereco(Guid fornecedorId);
+        Task<Fornecedor> ObterFornecedorProdutos(Guid fornecedorId);
         Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId);
 
         Task<bool> NomeJaUtilizado(string nome);

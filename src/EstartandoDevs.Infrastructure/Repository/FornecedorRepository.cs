@@ -47,5 +47,15 @@ namespace EstartandoDevs.Infrastructure.Repository
 
             return response;
         }
+
+        public async Task<Fornecedor> ObterFornecedorProdutos(Guid fornecedorId)
+        {
+            var response = await _contexto.Fornecedores
+                 .AsNoTracking()
+                 .Include(f => f.Produtos)
+                 .FirstOrDefaultAsync(fornecedor => fornecedor.Id == fornecedorId);
+
+            return response;
+        }
     }
 }

@@ -13,8 +13,10 @@
         public Fornecedor? Fornecedor { get; private set; }
 
         public Produto() { }
-        public Produto (string? nome, string? descricao, decimal valor)
+        public Produto (Guid fornecedorId, string? nome, string? descricao, decimal valor)
         {
+            // estourar exceção se nulo ou vazio
+            FornecedorId = fornecedorId;
             Nome = nome;
             Descricao = descricao;
             Valor = valor;

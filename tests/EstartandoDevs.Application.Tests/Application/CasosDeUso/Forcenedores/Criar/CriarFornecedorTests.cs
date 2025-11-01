@@ -75,7 +75,7 @@ namespace EstartandoDevs.Application.Tests.Application.CasosDeUso.Forcenedores.C
             await AppDbContext.Set<Fornecedor>().AddAsync(fornecedorMock);
             await AppDbContext.SaveChangesAsync();
             //Arrange
-            var command = new EditarFornecedorCommand(fornecedorMock.Id,"Fornecedor Teste", "445.278.280-96", 1); // Comando válido
+            var command = new EditarFornecedorCommand(fornecedorMock.Id,"Fornecedor Teste"); // Comando válido
 
             //Act
             var handler = _autoMocker.CreateInstance<EditarFornecedorCommandHandler>();
@@ -89,8 +89,6 @@ namespace EstartandoDevs.Application.Tests.Application.CasosDeUso.Forcenedores.C
                 .FirstOrDefaultAsync(f => f.Id == (Guid)fornecedorMock.Id);
 
             Assert.Equal(command.Nome, fornecedorMock.Nome);
-            Assert.Equal(command.Documento, fornecedorMock.Documento);
-            Assert.Equal(command.TipoFornecedor, (int)fornecedorMock.TipoFornecedor);
         }
     }
 }

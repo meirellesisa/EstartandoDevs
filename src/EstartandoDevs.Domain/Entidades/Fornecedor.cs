@@ -4,15 +4,15 @@ namespace EstartandoDevs.Domain.Entidades
 {
     public class Fornecedor : Entity
     {
-        public string? Nome { get;private set ; }
-        public string? Documento { get;private set ; }
-        public TipoFornecedorEnum TipoFornecedor { get;private set ; }
-        public bool Ativo { get;private set ; }
-        public Endereco? Endereco { get;private set ; }
+        public string? Nome { get; private set; }
+        public string? Documento { get; private set; }
+        public TipoFornecedorEnum TipoFornecedor { get; private set; }
+        public bool Ativo { get; private set; }
+        public Endereco? Endereco { get; private set; }
 
         // EF
-        public IEnumerable<Produto> Produtos { get; private set; } = [];
-       
+        public List<Produto> Produtos { get; private set; } = [];
+
         public Fornecedor() { }
         public Fornecedor(string? nome, string? documento, int tipoFornecedor)
         {
@@ -38,10 +38,19 @@ namespace EstartandoDevs.Domain.Entidades
             Documento = docuemento.Trim();
         }
 
-        public void AtribuirTipoFornecedor(int tipo) {
+        public void AtribuirTipoFornecedor(int tipo)
+        {
             if (tipo <= 0) throw new ArgumentOutOfRangeException(nameof(tipo), "O TipoDoFornecedor deve ser maior que zero.");
 
             TipoFornecedor = Enum.Parse<TipoFornecedorEnum>(tipo.ToString());
+        }
+
+        public void AtribuirProduto(Produto produto)
+        {
+            if (produto == null)
+                throw new ArgumentNullException(nameof(produto), "O produto não pode ser nulo.");
+
+            Produtos.Add(produto);
         }
     }
 }

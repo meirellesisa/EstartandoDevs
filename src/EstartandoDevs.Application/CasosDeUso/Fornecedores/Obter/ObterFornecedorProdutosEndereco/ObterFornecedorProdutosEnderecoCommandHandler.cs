@@ -27,7 +27,7 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
 
                 if (fornecedorProdutosEndereco == null)
                 {
-                    return CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>.AdicionarErro("Fornecedor não encontrado.", System.Net.HttpStatusCode.NotFound);
+                    return CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>.AdicionarErro("Fornecedor não encontrado.", HttpStatusCode.NotFound);
                 }
 
                 var enderecoResponse = fornecedorProdutosEndereco.Endereco == null
@@ -42,17 +42,19 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
                         fornecedorProdutosEndereco.Endereco.Cidade ?? string.Empty,
                         fornecedorProdutosEndereco.Endereco.Estado ?? string.Empty);
 
+                var produtosResponse = fornecedorProdutosEndereco.Produtos?.Select(fpe =>
+                         new ObterFornecedorProdutosEndereco_Produtos(
+                              fpe.Nome ?? string.Empty,
+                              fpe.Descricao ?? string.Empty,
+                              fpe.Valor)).ToList();
+
                 var response = new ObterFornecedorProdutosEnderecoCommandResponse(
                     fornecedorProdutosEndereco.Id,
                     fornecedorProdutosEndereco.Nome ?? string.Empty,
                     fornecedorProdutosEndereco.Documento ?? string.Empty,
                     fornecedorProdutosEndereco.TipoFornecedor,
                     endereco: enderecoResponse,
-                    produtos: fornecedorProdutosEndereco.Produtos?.Select(fpe =>
-                         new ObterFornecedorProdutosEndereco_Produtos(
-                              fpe.Nome ?? string.Empty,
-                              fpe.Descricao ?? string.Empty,
-                              fpe.Valor)).ToList());
+                    produtos: produtosResponse);
 
                 return CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>.Sucesso(response, HttpStatusCode.OK);
             }

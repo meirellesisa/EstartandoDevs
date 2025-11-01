@@ -21,7 +21,7 @@ namespace EstartandoDevs.API.Controller
         }
 
         [HttpGet]
-        [Route("/fornecedores")]
+        [Route("fornecedores")]
         public async Task<IActionResult> ObterTodos()
         {
             var command = new ListarFornecedoresProdutosCommand();
@@ -43,7 +43,7 @@ namespace EstartandoDevs.API.Controller
         [HttpPost]
         [Route("fornecedores")]
         public async Task<IActionResult> CriarFornecedor(
-            [FromBody] CriarFornecedor request)
+            [FromBody] CriarFornecedor request) // falta request no nome 
         {
             var command = new CriarFornecedorCommand(
                 nome: request.Nome,
