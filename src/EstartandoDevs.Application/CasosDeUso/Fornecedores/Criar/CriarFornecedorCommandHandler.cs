@@ -43,6 +43,7 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Criar
                 // Retornar uma resposta pro usuário 
                 return CommandResponse<CriarFornecedorCommandResponse>.Sucesso(response, statusCode: HttpStatusCode.Created);
 
+                // testando subida 
             }
             catch (Exception ex)
             {
