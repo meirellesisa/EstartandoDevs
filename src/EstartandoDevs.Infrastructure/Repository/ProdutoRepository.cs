@@ -39,5 +39,14 @@ namespace EstartandoDevs.Infrastructure.Repository
 
             return response;
         }
+
+        public async Task<Produto> ProdutoExisteEPertenseAoFornecedor(Guid fornecedorId, Guid produtoId)
+        {
+            var response = await _contexto.Produtos
+                .AsNoTracking()
+                .FirstOrDefaultAsync(produto => produto.FornecedorId == fornecedorId && produto.Id == produtoId);
+
+            return response;
+        }
     }
 }

@@ -64,19 +64,27 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
     {
         public string? Nome { get; private set; }
         public string? Descricao { get; private set; }
+        public string? PreviewUrl { get; private set; }
         public decimal Valor { get; private set; }
         public DateTime DataCadastro { get; private set; }
 
         public ObterFornecedorProdutosEndereco_Produtos(
             string nome,
             string descricao,
+            string? previewUrl,
             decimal valor)
         {
             Nome = nome;
             Descricao = descricao;
+            PreviewUrl = previewUrl;
             Valor = valor;
             DataCadastro = DateTime.Now;
 
+        }
+
+        public void AdicionarPreviewUrl(string previewUrl)
+        {
+            PreviewUrl = previewUrl;
         }
     }
 }

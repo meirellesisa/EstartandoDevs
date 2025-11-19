@@ -4,6 +4,7 @@
     {
         public Guid FornecedorId { get; private set; }
         public string? Nome { get; private set; }
+        public string? NomeArquivo { get; private set;}
         public string ? Descricao { get; private set; }
         public decimal Valor { get; private set; }
         public DateTime DataCadastro { get; private set; }
@@ -21,6 +22,12 @@
             Descricao = descricao;
             Valor = valor;
             Ativo = true;
+        }
+
+        public void AtribuirNomeArquivo(string nomeArquivo)
+        {
+            ArgumentNullException.ThrowIfNullOrEmpty(nomeArquivo, nameof(nomeArquivo));
+            NomeArquivo = nomeArquivo;
         }
     }
 }

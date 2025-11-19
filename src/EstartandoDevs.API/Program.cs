@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using EstartandoDevs.Infrastructure.Cloud.UploadArquivoS3.Interface;
+using EstartandoDevs.Infrastructure.Cloud.UploadArquivoS3;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +44,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Repositórios
 builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IAwsS3Service, AwsS3Service>();
 
 // Health Checks
 builder.Services.AddHealthChecks()

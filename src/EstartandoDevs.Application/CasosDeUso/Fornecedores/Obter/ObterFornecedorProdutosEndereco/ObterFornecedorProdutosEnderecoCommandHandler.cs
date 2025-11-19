@@ -1,5 +1,6 @@
 ﻿using EstartandoDevs.Application.Mediator;
 using EstartandoDevs.Domain.Repository;
+using EstartandoDevs.Infrastructure.Cloud.UploadArquivoS3.Interface;
 using MediatR;
 using System.Net;
 
@@ -8,10 +9,14 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
     public class ObterFornecedorProdutosEnderecoCommandHandler : IRequestHandler<ObterFornecedorProdutosEnderecoCommand, CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>>
     {
         private readonly IFornecedorRepository _fornecedorRepository;
+        private readonly IAwsS3Service _awsS3Service;
 
-        public ObterFornecedorProdutosEnderecoCommandHandler(IFornecedorRepository fornecedorRepository)
+        public ObterFornecedorProdutosEnderecoCommandHandler(
+            IFornecedorRepository fornecedorRepository, 
+            IAwsS3Service awsS3Service)
         {
             _fornecedorRepository = fornecedorRepository;
+            _awsS3Service = awsS3Service;
         }
 
         public async Task<CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>> Handle(ObterFornecedorProdutosEnderecoCommand request, CancellationToken cancellationToken)
@@ -42,11 +47,30 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
                         fornecedorProdutosEndereco.Endereco.Cidade ?? string.Empty,
                         fornecedorProdutosEndereco.Endereco.Estado ?? string.Empty);
 
-                var produtosResponse = fornecedorProdutosEndereco.Produtos?.Select(fpe =>
-                         new ObterFornecedorProdutosEndereco_Produtos(
-                              fpe.Nome ?? string.Empty,
-                              fpe.Descricao ?? string.Empty,
-                              fpe.Valor)).ToList();
+                var produtosResponse = fornecedorProdutosEndereco.Produtos?.Select(async produto =>
+                {
+                     var preview = await _awsS3Service.GerarPresignedUrlDownloadAsync(
+                                   caminho: $"fornecedores/{produto.FornecedorId}/produtos/{produto.Id}",
+                                   nomeArquivo: produto.NomeArquivo ?? string.Empty);
+
+                    return new ObterFornecedorProdutosEndereco_Produtos(
+                        produto.Nome ?? string.Empty,
+                        produto.Descricao ?? string.Empty,
+                        preview,
+                        produto.Valor);
+                });
+
+                var responseProdutos = await Task.WhenAll(produtosResponse);
+            
+                var teste = fornecedorProdutosEndereco.Produtos?.Select(produto =>
+                {
+                    var dado = _awsS3Service.GerarPresignedUrlDownloadAsync(
+                        $"fornecedores/{produto.FornecedorId}/produtos/{produto.Id}",
+                        produto.NomeArquivo ?? string.Empty);
+
+                    
+                    return dado;
+                });
 
                 var response = new ObterFornecedorProdutosEnderecoCommandResponse(
                     fornecedorProdutosEndereco.Id,
@@ -54,7 +78,7 @@ namespace EstartandoDevs.Application.CasosDeUso.Fornecedores.Obter.ObterForneced
                     fornecedorProdutosEndereco.Documento ?? string.Empty,
                     fornecedorProdutosEndereco.TipoFornecedor,
                     endereco: enderecoResponse,
-                    produtos: produtosResponse);
+                    produtos: responseProdutos.ToList());
 
                 return CommandResponse<ObterFornecedorProdutosEnderecoCommandResponse>.Sucesso(response, HttpStatusCode.OK);
             }
